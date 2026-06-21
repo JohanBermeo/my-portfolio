@@ -4,7 +4,7 @@ import Logo from '../assets/Logo.webp';
 
 <header id="header-container">
     <div id="header-content">
-        <a href="/" class="logo-container">
+        <a href="/" id="logo-container">
             <img id="logo" src={Logo.src} alt="Logo" />
             <span id="first-name">JOHAN</span>
             <span id="last-name">BERMEO </span>
@@ -22,21 +22,45 @@ import Logo from '../assets/Logo.webp';
 </header>
 
 <style>
+    @keyframes borderFlash {
+        0% {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+        }
+        100% {
+            border-bottom: 1px solid #280909;
+            box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+        }
+    }
+
     #header-container {
         width: 100%;
+        position: fixed;
+        top: 0;
+        background-color: transparent;
+        border-bottom: 1px solid transparent; /* Para evitar saltos cuando aparece el borde */
+        z-index: 1000;
+        transition: background-color 0.3s ease;
     }
-    
-	#header-content {
-		display: flex;
+
+    #header-container.scrolled {
+        border-bottom: 1px solid #280909;
+        background-color: #080404;
+        animation: borderFlash 0.8s ease-out forwards;
+    }
+
+    #header-content {
+        display: flex;
         flex-direction: row;
-		justify-content: space-between;
+        justify-content: space-between;
 		align-items: center;
+        background-color: transparent;
         padding: 0 40px;
-        margin: 0 313px;
+        margin: 0 120px;
         height: 64px;
 	}
 
-    .logo-container {
+    #logo-container {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -107,3 +131,46 @@ import Logo from '../assets/Logo.webp';
         color: #FFFFFF;
     }
 </style>
+
+<script>
+	// Run script when the DOM is fully loaded
+	document.addEventListener('DOMContentLoaded', () => {
+		const isHome = window.location.pathname === "/";
+		
+		// 1. Manejo del Scroll
+		const handleScroll = () => {
+			const navbar = document.getElementById('header-container');
+			if (navbar) {
+				if (window.scrollY > 40) {
+					navbar.classList.add('scrolled');
+				} else {
+					navbar.classList.remove('scrolled');
+				}
+			}
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		handleScroll(); // Ejecutar una vez por si la página ya cargó con scroll
+		
+		// 2. Manejo de enlaces y scroll suave
+		const navLinks = document.querySelectorAll('#navigation-links a'); 
+		navLinks.forEach(link => {
+			link.addEventListener('click', (e) => {
+				const href = link.getAttribute('href');
+				
+				if (!href || !href.startsWith('#')) return;
+
+				if (!isHome) {
+					// Si no estás en home, redirigir a home + el ancla
+					window.location.href = "/" + href;
+					return;
+				}
+				
+				// Si estás en home, hacer scroll suave
+				e.preventDefault();
+				const el = document.querySelector(href);
+				if (el) el.scrollIntoView({ behavior: "smooth" });
+			});
+		});
+	});
+</script>
