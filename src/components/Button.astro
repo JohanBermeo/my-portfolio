@@ -1,0 +1,72 @@
+---
+interface Props { 
+    type?:  "red" | "transparent-white" | "transparent-red";
+    id?: string;
+}
+
+const { type, id } = Astro.props;
+
+const buttonClass = {
+    "red": "btn-red",
+    "transparent-white": "btn-transparent-white",
+    "transparent-red": "btn-transparent-red"
+}
+---
+
+<button class:list={["btn-base", buttonClass[type]]} id={id}>
+    <slot/>
+</button>
+
+<style>
+    .btn-base {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border-radius: 14px;
+        cursor: pointer;
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        height: 46px;
+    }
+
+    .btn-red {
+        border: 1px solid #DC2626;
+        background-color: #DC2626;
+        color: #FFFFFF;
+    }
+
+    .btn-red:hover {
+        transition: all 0.15s ease-in-out;
+        border: 1px solid #B91C1C;
+        background-color: #B91C1C;
+        color: #FFFFFF;
+    }
+
+    .btn-transparent-white {
+        border: 1px solid #DC2626;
+        background-color: transparent;
+        color: #FFFFFF;
+    }
+
+    .btn-transparent-white:hover {
+        transition: all 0.15s ease-in-out;
+        color: #DC2626;
+    }
+
+    .btn-transparent-red {
+        border: 1px solid #DB2727;
+        background-color: transparent;
+        color: #DB2727;
+    }
+
+    .btn-transparent-red:hover {
+        transition: all 0.15s ease-in-out;
+        border: 1px solid #DB2727;
+        background-color: #DB2727;
+        color: #FFFFFF;
+    }
+</style>

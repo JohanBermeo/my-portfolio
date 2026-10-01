@@ -1,5 +1,6 @@
 ---
 import Logo from '../assets/Logo.webp';
+import Button from "./Button.astro";
 ---
 
 <header id="header-container">
@@ -15,7 +16,7 @@ import Logo from '../assets/Logo.webp';
                 <a href="#">Sobre mí</a>
                 <a href="#">Proyectos</a>
                 <a href="#">Tecnologías</a>
-                <button id="contact-button">Contáctame</button>
+                <Button type="transparent-red" id="contact-button">Contáctame</Button>
             </nav>
         </div>
     </div>
@@ -56,7 +57,7 @@ import Logo from '../assets/Logo.webp';
 		align-items: center;
         background-color: transparent;
         padding: 0 40px;
-        margin: 0 120px;
+        margin: 0 313px;
         height: 64px;
 	}
 
@@ -112,17 +113,7 @@ import Logo from '../assets/Logo.webp';
     }
 
     #contact-button {
-        background-color: transparent;
-        border: 1px solid #DB2727;
-        border-radius: 4px;
-        color: #DB2727;
-        font-size: 14px;
-        font-family: "Inter", sans-serif;
-        font-weight: 500;
-        padding: 8px 16px;
-        line-height: 20px;
-        cursor: pointer;
-        border-radius: 10px;
+        height: 38px;
     }
 
     #contact-button:hover {

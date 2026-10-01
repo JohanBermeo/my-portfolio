@@ -1,54 +1,323 @@
 ---
-
+import Button from "./Button.astro";
+import heroImage from "../assets/HeroImage.jpg";
 ---
 
-<section>
+<section id="hero-container">
 	<div id="hero-content">
-		<div id="hero-title-container">
-			<h1 id="hero-title">Johan Bermeo</h1>
-			<h2 id="hero-subtitle">Ingeniero de Software</h2>
+		<div id="hero-left-container">
+			<div id="hero-tag-container">
+				<span id="hero-tag-icon"></span>
+				<span id="hero-tag">SOFTWARE DEVELOPER</span>
+			</div>
+
+			<div id="hero-title-container">
+				<h1 id="hero-title">Hola, soy {" "}
+					<span id="hero-name">Johan Bermeo</span>
+				</h1>
+				<p id="hero-description">
+					Diseño y desarrollo aplicaciones web y móviles que combinan funcionalidad sólida con experiencias visuales memorables. Me cautiva transformar ideas en productos digitales de alto impacto.
+				</p>
+			</div>
+
+			<div id="hero-location-container">
+				<img src="/src/assets/MapIcon.svg" alt="Location" id="hero-location-icon"/>
+				<span id="hero-location-text">Bogotá, Colombia - Disponible para proyectos remotos</span>
+			</div>
+
+			<div id="hero-button-container">
+				<Button type="red">
+					<img src="/src/assets/DownloadIcon.svg" alt="Download" id="hero-download-icon"/>
+					<span>Descargar CV</span>
+				</Button>
+				<Button type="transparent-white">Ver Proyectos</Button>
+			</div>
+
+			<div id="hero-social-container">
+				<a href="https://github.com/johanbermeo" target="_blank">
+					<img src="/src/assets/GithubIcon.svg" alt="Github" id="hero-github-icon"/>
+				</a>
+				<a href="https://www.linkedin.com/in/johan-bermeo/" target="_blank">
+					<img src="/src/assets/LinkedinIcon.svg" alt="Linkedin" id="hero-linkedin-icon"/>
+				</a>
+				<span id="hero-social-icon"></span>
+				<a href="mailto:johan.bermeo29@outlook.com" target="_blank" id="hero-email-link">johan.bermeo29@outlook.com</a>
+			</div>
 		</div>
+
+		<div id="hero-right-container">
+			<div id="hero-image-container">
+				<!-- 3 Círculos anidados con distintas opacidades -->
+				<div class="hero-circle hero-circle-outer"></div>
+				<div class="hero-circle hero-circle-middle"></div>
+
+				<!-- Imagen de perfil resaltada en el centro -->
+				<img src={heroImage.src} alt="Johan Bermeo - Software Developer" id="hero-image"/>
+
+				<!-- Badge "Disponible para trabajar" con punto verde titilante -->
+				<div id="hero-status-badge">
+					<span class="status-dot-wrapper">
+						<span class="status-dot-ping"></span>
+						<span class="status-dot-core"></span>
+					</span>
+					<span id="hero-status-text">Disponible para trabajar</span>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </section>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		height: 100vh;
+	#hero-container {
+		min-height: 84.9vh;
+		padding: 146px 313px 0;
 		background: 
-		linear-gradient(to right, #200909 1px , transparent 1px) 0 0 / 40px 40px,
-		linear-gradient(to bottom, #200909 1px , transparent 1px) 0 0 / 40px 40px,
-		radial-gradient(ellipse 80% 60% at 50% 0%, #240808, transparent 90%) 0 0 / 100% 100%, #080404;
+			linear-gradient(to right, #160505 1px, transparent 1px) 0 0 / 40px 40px,
+			linear-gradient(to bottom, #160505 1px , transparent 1px) 0 0 / 40px 40px,
+			radial-gradient(ellipse 80% 60% at 50% 0%, #240808, transparent 90%) 0 0 / 100% 100%, #080404;
+		border-bottom: 1px solid #280909;
 	}
 
 	#hero-content {
 		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+		height: 100%;
+		width: 100%;
+		flex-direction: row;
+		padding: 96px 40px 0;
+		gap: 48px;
 	}
 
-	#hero-title-container {
+	#hero-left-container {
 		display: flex;
 		flex-direction: column;
+		width: 50%;
+		height: fit-content;
+		gap: 24px;
+	}
+
+	#hero-tag-container {
+		display: flex;
+		flex-direction: row;
 		align-items: center;
-		justify-content: center;
+		gap: 8px;
+		height: fit-content;
+	}
+
+	#hero-tag-icon {
+		width: 32px;
+		height: 1px;
+		background-color: #DC2626;
+		line-height: 24px;
+	}
+
+	#hero-tag {
+		color: #DC2626;
+		font-size: 14px;
+		font-family: "Bricolage Grotesque", sans-serif;
+		letter-spacing: 0.05em;
+		line-height: 16px;
 	}
 
 	#hero-title {
-		color: #FFFFFF;
-		font-size: 48px;
-		font-family: "Bricolage Grotesque", sans-serif;
-		font-weight: 600;
+		font-size: 64px;
+		font-family: "Space Grotesque", sans-serif;
+		font-weight: 700;
+		line-height: 1.15;
+		color: #F5F0F0;
+		margin: 0;
 	}
 
-	#hero-subtitle {
+	#hero-name {
+		font-size: 64px;
+		font-family: "Space Grotesque", sans-serif;
+		font-weight: 700;
+		line-height: 74px;
 		color: #DB2727;
-		font-size: 24px;
+		display: block;
+	}
+
+	#hero-description {
+		font-size: 17px;
 		font-family: "Inter", sans-serif;
-		font-weight: 500;
+		font-weight: 400;
+		line-height: 27px;
+		color: #9e9e9e;
+		margin: 0;
+		width: 512px;
+	}
+
+	#hero-location-container {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 8px;
+	}
+
+	#hero-location-icon {
+		width: 13px;
+		height: 13px;
+	}
+
+	#hero-location-text {
+		color: #717171;
+		font-size: 14px;
+		font-family: "Bricolage Grotesque", sans-serif;
+		line-height: 16px;
+	}
+
+	#hero-button-container {
+		display: flex;
+		flex-direction: row;
+		gap: 16px;
+	}
+
+	#hero-download-icon {
+		width: 16px;
+		height: 16px;
+	}
+
+	#hero-social-container {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 32px;
+		padding: 8px;
+	}
+
+	#hero-github-icon {
+		width: 22px;
+		height: 22px;
+	}
+
+	#hero-linkedin-icon {
+		width: 20px;
+		height: 20px;
+	}
+
+	#hero-social-icon {
+		width: 1px;
+		height: 20px;
+		background-color: #dc262633;
+	}
+
+	#hero-email-link {
+		color: #717171;
+		font-size: 12px;
+		font-family: "Bricolage Grotesque", sans-serif;
+		line-height: 16px;
+		text-decoration: none;
+	}
+
+	#hero-right-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50%;
+		height: 100%;
+	}
+	
+	#hero-image-container {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 442px;
+		height: 442px;
+	}
+
+	.hero-circle {
+		position: absolute;
+		border-radius: 50%;
+		pointer-events: none;
+	}
+
+	.hero-circle-outer {
+		width: 442px;
+		height: 442px;
+		border: 1px solid rgba(220, 38, 38, 0.15);
+		background: radial-gradient(circle, rgba(220, 38, 38, 0.03) 0%, transparent 70%);
+	}
+
+	.hero-circle-middle {
+		width: 378px;
+		height: 378px;
+		border: 1px solid rgba(220, 38, 38, 0.3);
+		background: rgba(220, 38, 38, 0.04);
+	}
+
+	#hero-image {
+		position: relative;
+		z-index: 2;
+		width: 315px;
+		height: 315px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 3px solid #dc262680;
+	}
+
+	#hero-status-badge {
+		position: absolute;
+		bottom: 24px;
+		z-index: 10;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 6px 14px;
+		background: rgba(14, 5, 5, 0.88);
+		border: 1px solid rgba(220, 38, 38, 0.3);
+		border-radius: 9999px;
+		backdrop-filter: blur(8px);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+		transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	#hero-status-badge:hover {
+		border-color: rgba(220, 38, 38, 0.6);
+		transform: translateY(-2px);
+		box-shadow: 0 6px 24px rgba(220, 38, 38, 0.25);
+	}
+
+	.status-dot-wrapper {
+		position: relative;
+		display: flex;
+		width: 8px;
+		height: 8px;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.status-dot-ping {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		background-color: #22c55e;
+		opacity: 0.75;
+		animation: status-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+	}
+
+	.status-dot-core {
+		position: relative;
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background-color: #22c55e;
+		box-shadow: 0 0 8px #22c55e;
+	}
+
+	@keyframes status-ping {
+		75%, 100% {
+			transform: scale(2.4);
+			opacity: 0;
+		}
+	}
+
+	#hero-status-text {
+		color: #717171;
+		font-size: 12px;
+		font-family: "Bricolage Grotesque", sans-serif;
+		line-height: 16px;
+		white-space: nowrap;
 	}
 </style>
