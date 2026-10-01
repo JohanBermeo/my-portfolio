@@ -34,10 +34,10 @@ import heroImage from "../assets/HeroImage.jpg";
 			</div>
 
 			<div id="hero-social-container">
-				<a href="https://github.com/johanbermeo" target="_blank">
+				<a href="https://github.com/johanbermeo" target="_blank" class="hero-social-link">
 					<img src="/src/assets/GithubIcon.svg" alt="Github" id="hero-github-icon"/>
 				</a>
-				<a href="https://www.linkedin.com/in/johan-bermeo/" target="_blank">
+				<a href="https://www.linkedin.com/in/johan-bermeo/" target="_blank" class="hero-social-link">
 					<img src="/src/assets/LinkedinIcon.svg" alt="Linkedin" id="hero-linkedin-icon"/>
 				</a>
 				<span id="hero-social-icon"></span>
@@ -66,12 +66,20 @@ import heroImage from "../assets/HeroImage.jpg";
 		</div>
 
 	</div>
+
+	<a href="#proyectos" id="hero-scroll-container">
+		<span id="hero-scroll-text">SCROLL</span>
+		<img src="/src/assets/ArrowDownIcon.svg" alt="Scroll" id="hero-scroll-icon"/>
+	</a>
 </section>
 
 <style>
 	#hero-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		min-height: 84.9vh;
-		padding: 146px 313px 0;
+		padding: 146px 313px 32px;
 		background: 
 			linear-gradient(to right, #160505 1px, transparent 1px) 0 0 / 40px 40px,
 			linear-gradient(to bottom, #160505 1px , transparent 1px) 0 0 / 40px 40px,
@@ -188,11 +196,21 @@ import heroImage from "../assets/HeroImage.jpg";
 	#hero-github-icon {
 		width: 22px;
 		height: 22px;
+		transition: filter 0.1s ease;
+	}
+
+	#hero-github-icon:hover {
+		filter: brightness(0) saturate(100%) invert(26%) sepia(90%) saturate(2586%) hue-rotate(345deg) brightness(96%) contrast(89%);
 	}
 
 	#hero-linkedin-icon {
 		width: 20px;
 		height: 20px;
+		transition: filter 0.1s ease;
+	}
+
+	#hero-linkedin-icon:hover {
+		filter: brightness(0) saturate(100%) invert(26%) sepia(90%) saturate(2586%) hue-rotate(345deg) brightness(96%) contrast(89%);
 	}
 
 	#hero-social-icon {
@@ -319,5 +337,45 @@ import heroImage from "../assets/HeroImage.jpg";
 		font-family: "Bricolage Grotesque", sans-serif;
 		line-height: 16px;
 		white-space: nowrap;
+	}
+
+	#hero-scroll-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 6px;
+		margin-top: 48px;
+		text-decoration: none;
+		color: #717171;
+		transition: color 0.3s ease, transform 0.3s ease;
+		cursor: pointer;
+	}
+
+	#hero-scroll-text {
+		font-size: 11px;
+		font-family: "Bricolage Grotesque", sans-serif;
+		letter-spacing: 0.2em;
+		font-weight: 500;
+		line-height: 14px;
+	}
+
+	#hero-scroll-icon {
+		width: 16px;
+		height: 16px;
+		animation: scroll-bounce 2s infinite ease-in-out;
+		filter: brightness(0) saturate(100%) invert(44%);
+		transition: filter 0.3s ease;
+	}
+
+	@keyframes scroll-bounce {
+		0%, 20%, 50%, 80%, 100% {
+			transform: translateY(0);
+		}
+		40% {
+			transform: translateY(6px);
+		}
+		60% {
+			transform: translateY(3px);
+		}
 	}
 </style>
