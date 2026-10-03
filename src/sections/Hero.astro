@@ -1,5 +1,5 @@
 ---
-import Button from "./Button.astro";
+import Button from "../components/Button.astro";
 import heroImage from "../assets/HeroImage.jpg";
 ---
 
@@ -344,7 +344,7 @@ import heroImage from "../assets/HeroImage.jpg";
 		flex-direction: column;
 		align-items: center;
 		gap: 6px;
-		margin-top: 48px;
+		margin-top: 64px;
 		text-decoration: none;
 		color: #717171;
 		transition: color 0.3s ease, transform 0.3s ease;
@@ -352,7 +352,7 @@ import heroImage from "../assets/HeroImage.jpg";
 	}
 
 	#hero-scroll-text {
-		font-size: 11px;
+		font-size: 12px;
 		font-family: "Bricolage Grotesque", sans-serif;
 		letter-spacing: 0.2em;
 		font-weight: 500;
@@ -364,7 +364,6 @@ import heroImage from "../assets/HeroImage.jpg";
 		height: 16px;
 		animation: scroll-bounce 2s infinite ease-in-out;
 		filter: brightness(0) saturate(100%) invert(44%);
-		transition: filter 0.3s ease;
 	}
 
 	@keyframes scroll-bounce {
@@ -372,7 +371,7 @@ import heroImage from "../assets/HeroImage.jpg";
 			transform: translateY(0);
 		}
 		40% {
-			transform: translateY(6px);
+			transform: translateY(3px);
 		}
 		60% {
 			transform: translateY(3px);
