@@ -3,7 +3,7 @@ import Button from "../components/Button.astro";
 import heroImage from "../assets/HeroImage.jpg";
 ---
 
-<section id="hero-container">
+<section id="hero">
 	<div id="hero-content">
 		<div id="hero-left-container">
 			<div id="hero-tag-container">
@@ -47,14 +47,11 @@ import heroImage from "../assets/HeroImage.jpg";
 
 		<div id="hero-right-container">
 			<div id="hero-image-container">
-				<!-- 3 Círculos anidados con distintas opacidades -->
 				<div class="hero-circle hero-circle-outer"></div>
 				<div class="hero-circle hero-circle-middle"></div>
 
-				<!-- Imagen de perfil resaltada en el centro -->
 				<img src={heroImage.src} alt="Johan Bermeo - Software Developer" id="hero-image"/>
 
-				<!-- Badge "Disponible para trabajar" con punto verde titilante -->
 				<div id="hero-status-badge">
 					<span class="status-dot-wrapper">
 						<span class="status-dot-ping"></span>
@@ -67,14 +64,14 @@ import heroImage from "../assets/HeroImage.jpg";
 
 	</div>
 
-	<a href="#proyectos" id="hero-scroll-container">
+	<a href="#about" id="hero-scroll-container">
 		<span id="hero-scroll-text">SCROLL</span>
 		<img src="/src/assets/ArrowDownIcon.svg" alt="Scroll" id="hero-scroll-icon"/>
 	</a>
 </section>
 
 <style>
-	#hero-container {
+	#hero {
 		display: flex;
 		flex-direction: column;
 		align-items: center;

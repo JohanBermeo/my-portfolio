@@ -1,0 +1,161 @@
+---
+interface Props {
+    type?: 'simple' | 'complex' | string;
+    logo?: any;
+    title?: string;
+    subtitle?: string;
+    text?: string;
+    date?: string;
+}
+
+const { logo, type, text, title, subtitle, date } = Astro.props;
+
+// Determine if logo is a string URL, an ImageMetadata object, or a Component
+const logoSrc = typeof logo === "string" 
+    ? logo 
+    : (typeof logo === "object" && logo !== null && "src" in logo ? logo.src : null);
+
+const LogoComponent = typeof logo === "function" ? logo : (typeof logo === "object" && logo !== null && typeof logo.default === "function" ? logo.default : null);
+---
+
+<div class:list={["tag", type]}>
+    {type === "simple" && (
+        <div class="tag-simple-content">
+            {logoSrc ? (
+                <img src={logoSrc} alt={title || "Logo"} class="tag-logo" />
+            ) : LogoComponent ? (
+                <span class="tag-logo"><LogoComponent /></span>
+            ) : logo ? (
+                <span class="tag-logo">{logo}</span>
+            ) : null}
+            <div class="tag-text-group">
+                {title && <h4 class="tag-title">{title}</h4>}
+                {subtitle && <span class="tag-subtitle">{subtitle}</span>}
+            </div>
+        </div>
+    )}
+
+    {type === "complex" && (
+        <div class="tag-complex-content">
+            <div class="tag-header">
+                <div class="tag-title-group">
+                    {title && <h3 class="tag-title">{title}</h3>}
+                    {subtitle && <span class="tag-subtitle">{subtitle}</span>}
+                </div>
+                {date && <span class="tag-date">{date}</span>}
+            </div>
+            {text && <p class="tag-text">{text}</p>}
+        </div>
+    )}
+
+    {!type && (
+        <div class="tag-default-content">
+            {logo && <span class="tag-logo">{logo}</span>}
+            {title && <span class="tag-title">{title}</span>}
+            {subtitle && <span class="tag-subtitle">{subtitle}</span>}
+            {text && <span class="tag-text">{text}</span>}
+            {date && <span class="tag-date">{date}</span>}
+        </div>
+    )}
+</div>
+
+<style>
+    .tag {
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        border-radius: 14px;
+        background-color: #150A0A;
+        border: 1px solid #2D0E0E;
+        font-family: "Inter", sans-serif;
+        color: #F5F0F0;
+        box-sizing: border-box;
+        height: 75px;
+        width: auto;
+    }
+
+    /* Simple Tag Layout */
+    .tag-simple-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .tag-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+        background-color: #DC26261A;
+        border-radius: 10px;
+        padding: 8.5px;
+    }
+
+    .tag-text-group {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .tag-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #F5F0F0;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .tag-subtitle {
+        font-size: 13px;
+        color: #9E9E9E;
+    }
+
+    /* Complex Tag Layout */
+    .tag-complex-content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .tag-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .tag-title-group {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .tag-date {
+        font-size: 12px;
+        color: #DC2626;
+        background-color: rgba(220, 38, 38, 0.1);
+        padding: 4px 8px;
+        border-radius: 6px;
+        white-space: nowrap;
+    }
+
+    .tag-text {
+        font-size: 14px;
+        color: #9E9E9E;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    /* Default Layout */
+    .tag-default-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+    }
+</style>

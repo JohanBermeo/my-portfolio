@@ -1,0 +1,120 @@
+---
+import Tag from "../components/Tag.astro";
+import CaseIcon from "../assets/CaseIcon.svg";
+import AwardIcon from "../assets/AwardIcon.svg";
+import CapIcon from "../assets/CapIcon.svg";
+import BugIcon from "../assets/BugIcon.svg";
+---
+
+<section id="about">
+    <div id="about-content">
+        <div id="about-header">
+            <h3 id="about-tag">QUIEN SOY</h3>
+            <h2 id="about-title">Sobre mí</h2>
+            <span id="about-tag-icon"></span>
+        </div>
+
+        <div id="about-main-container">
+            <div id="about-left-container">
+                <p>Soy un desarrollador apasionado por crear soluciones digitales que marcan la diferencia. Me especializo en el desarrollo web full stack, con enfoque en experiencias de usuario fluidas y código limpio y escalable. </p> 
+                <br>
+                <p>Cuando no estoy programando, disfruto aprender nuevas tecnologías, contribuir a proyectos open source y compartir conocimiento con la comunidad de desarrolladores. Creo firmemente en que el buen código es la base de productos digitales exitosos.</p>
+                <div id="tag-container">
+                    <Tag type="simple" title="1" subtitle="Año de experiencia" logo={CaseIcon}></Tag>
+                    <Tag type="simple" title="5+" subtitle="Proyectos completados" logo={AwardIcon}></Tag>
+                    <Tag type="simple" title="Ing." subtitle="Ingeniero de sistemas" logo={CapIcon}></Tag>
+                    <Tag type="simple" title="∞" subtitle="Errores de compilación" logo={BugIcon}></Tag>
+                </div>
+            </div>
+    
+            <div id="about-right-container">
+    
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    #about {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: fit-content;
+        background-color: #0D0606;
+    }
+
+    #about-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 96px 353px 0;
+    }
+
+    #about-tag {
+        font-size: 14px;
+        font-family: "Bricolage Grotesque", sans-serif;
+        letter-spacing: 0.05em;
+        line-height: 16px;
+        color: #DC2626;
+    }
+
+    #about-title {
+        font-size: 32px;
+        font-family: "Space Grotesque", sans-serif;
+        font-weight: 700;
+        line-height: 48px;
+        color: #F5F0F0;
+        margin: 0;
+    }
+
+    #about-tag-icon {
+		width: 32px;
+		height: 1px;
+		background-color: #DC2626;
+		line-height: 24px;
+        margin: 16px 0 0;
+	}
+
+    #about-main-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        margin: 64px 353px 96px;
+    }
+
+    #about-left-container {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: fit-content;
+    }
+
+    #about-left-container p {
+        font-size: 15px;
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        line-height: 27px;
+        color: #9E9E9E;
+        margin: 0;
+    }
+
+    #tag-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-gap: 16px;
+        margin: 40px 0 0;
+    }
+
+    #about-right-container {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: fit-content;
+        gap: 24px;
+    }
+</style>
