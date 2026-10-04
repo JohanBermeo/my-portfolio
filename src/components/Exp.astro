@@ -1,0 +1,181 @@
+---
+import CapIcon from "../assets/CapIcon.svg";
+import CaseIcon from "../assets/CaseIcon.svg";
+
+interface Props {
+    type?: 'study' | 'experience';
+    title?: string;
+    subtitle?: string;
+    date?: string;
+    text?: string;
+    logo?: any;
+}
+
+const { type = 'experience', title, subtitle, date, text, logo } = Astro.props;
+
+const DefaultIcon = type === 'study' ? CapIcon : CaseIcon;
+
+const logoSrc = typeof logo === "string" 
+    ? logo 
+    : (typeof logo === "object" && logo !== null && "src" in logo ? logo.src : null);
+
+const LogoComponent = typeof logo === "function" 
+    ? logo 
+    : (typeof logo === "object" && logo !== null && typeof logo.default === "function" ? logo.default : null);
+---
+
+<div class:list={["exp-item", type]}>
+    <div class="exp-timeline">
+        <div class="exp-line"></div>
+        <div class="exp-node">
+            {logoSrc ? (
+                <img src={logoSrc} alt={title || "Icon"} class="exp-node-icon" />
+            ) : LogoComponent ? (
+                <span class="exp-node-icon"><LogoComponent /></span>
+            ) : logo ? (
+                <span class="exp-node-icon">{logo}</span>
+            ) : (
+                <img src={DefaultIcon.src} alt={type} class="exp-node-icon" />
+            )}
+        </div>
+    </div>
+
+    <div class="exp-card">
+        <div class="exp-header">
+            <div class="exp-title-group">
+                {title && <h3 class="exp-title">{title}</h3>}
+                {subtitle && <span class="exp-subtitle">{subtitle}</span>}
+            </div>
+            {date && <span class="exp-date">{date}</span>}
+        </div>
+        {text && <p class="exp-text">{text}</p>}
+    </div>
+</div>
+
+<style>
+    .exp-item {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        width: 100%;
+        gap: 16px;
+    }
+
+    .exp-timeline {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        flex-shrink: 0;
+        width: 32px;
+    }
+
+    .exp-line {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        transform: translateX(-50%);
+        background-color: #2D0E0E;
+        z-index: 1;
+    }
+
+    .exp-node {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 15px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #150A0A;
+        border: 1px solid #DC2626;
+        box-sizing: border-box;
+    }
+
+    .exp-node-icon {
+        width: 16px;
+        height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        object-fit: contain;
+    }
+
+    .exp-card {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-top: 15px;
+        padding: 16px;
+        border-radius: 14px;
+        background-color: #150A0A;
+        border: 1px solid #2D0E0E;
+        box-sizing: border-box;
+        width: 100%;
+        flex-grow: 1;
+    }
+
+    .exp-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .exp-title-group {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .exp-title {
+        font-size: 14px;
+        margin: 0;
+        font-weight: 600;
+        color: #F5F0F0;
+        font-family: 'Space-Grotesk', sans-serif;
+        line-height: 21px;
+    }
+
+    .exp-subtitle {
+        font-size: 13px;
+        color: #DC2626;
+        line-height: 19px;
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+    }
+
+    .exp-date {
+        font-size: 12px;
+        color: #DC2626;
+        background-color: #DC26261A;
+        padding: 2px 8px;
+        border-radius: 6px;
+        white-space: nowrap;
+        line-height: 16px;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .exp-text {
+        font-size: 14px;
+        color: #717171;
+        line-height: 21px;
+        margin: 8px 0 0;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .exp-item.study .exp-node {
+        border-color: #DC2626;
+        background-color: #1E0C0C;
+    }
+
+    .exp-item.experience .exp-node {
+        border-color: #DC2626;
+        background-color: #150A0A;
+    }
+</style>

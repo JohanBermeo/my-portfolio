@@ -1,0 +1,24 @@
+{
+  "education": [
+    {
+      "title": "Ingeniería de Sistemas",
+      "subtitle": "Universidad Distrital Francisco José de Caldas",
+      "date": "2024 - Presente",
+      "text": "Formación enfocada en desarrollo de software, arquitectura de sistemas, bases de datos y algoritmos."
+    },
+    {
+      "title": "Técnico en Asistencia Administrativa",
+      "subtitle": "Servicio Nacional de Aprendizaje SENA",
+      "date": "2022 - 2024",
+      "text": "Formación enfocada en técnicas de organización, gestión de documentos, atención al cliente y soporte administrativo."
+    }
+  ],
+  "experience": [
+    {
+      "title": "Desarrollador Full Stack",
+      "subtitle": "Proyección Social UD",
+      "date": "2025 - Presente",
+      "text": "Construcción e implementación de soluciones digitales personalizadas, optimización UX/UI y rendimiento web."
+    }
+  ]
+}

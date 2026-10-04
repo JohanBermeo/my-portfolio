@@ -1,5 +1,7 @@
 ---
+import expData from "../data/experience.json";
 import Tag from "../components/Tag.astro";
+import Exp from "../components/Exp.astro";
 import CaseIcon from "../assets/CaseIcon.svg";
 import AwardIcon from "../assets/AwardIcon.svg";
 import CapIcon from "../assets/CapIcon.svg";
@@ -16,9 +18,9 @@ import BugIcon from "../assets/BugIcon.svg";
 
         <div id="about-main-container">
             <div id="about-left-container">
-                <p>Soy un desarrollador apasionado por crear soluciones digitales que marcan la diferencia. Me especializo en el desarrollo web full stack, con enfoque en experiencias de usuario fluidas y código limpio y escalable. </p> 
+                <p>Desarrollador Full Stack y estudiante de Ingeniería de Sistemas en Bogotá, enfocado en liderar arquitecturas sólidas y experiencias digitales de alto impacto. Especializado en el desarrollo de backends escalables en Python, Java y NestJS, así como en la creación de interfaces dinámicas con Astro, React y Svelte, combino la coordinación de equipos técnicos con una pasión constante por la ingeniería limpia y la eficiencia de procesos.</p> 
                 <br>
-                <p>Cuando no estoy programando, disfruto aprender nuevas tecnologías, contribuir a proyectos open source y compartir conocimiento con la comunidad de desarrolladores. Creo firmemente en que el buen código es la base de productos digitales exitosos.</p>
+                <p>Más allá de la arquitectura de software y el código, me motiva el aprendizaje continuo, la contribución activa a la comunidad tecnológica y el intercambio de conocimiento dentro del ecosistema dev. Entiendo el desarrollo como un proceso integral de innovación constante, disciplina y colaboración técnica, donde cada línea de código responde a una estrategia clara para resolver problemas reales y generar valor tangible.</p>
                 <div id="tag-container">
                     <Tag type="simple" title="1" subtitle="Año de experiencia" logo={CaseIcon}></Tag>
                     <Tag type="simple" title="5+" subtitle="Proyectos completados" logo={AwardIcon}></Tag>
@@ -28,12 +30,81 @@ import BugIcon from "../assets/BugIcon.svg";
             </div>
     
             <div id="about-right-container">
-    
+                <div id="about-selector">
+                    <div class="button-container" data-active="education">
+                        <div class="selector-line"></div>
+                        <button class="selector-button active" id="btn-education" type="button" data-tab="education">
+                            <span class="selector-label">ESTUDIOS</span>
+                        </button>
+                        <button class="selector-button" id="btn-experience" type="button" data-tab="experience">
+                            <span class="selector-label">EXPERIENCIA</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="exp-container">
+                    <div id="tab-education" class="exp-tab-content active">
+                        {expData.education.map((item) => (
+                            <Exp 
+                                type="study" 
+                                title={item.title} 
+                                subtitle={item.subtitle} 
+                                date={item.date} 
+                                text={item.text} 
+                            />
+                        ))}
+                    </div>
+
+                    <div id="tab-experience" class="exp-tab-content">
+                        {expData.experience.map((item) => (
+                            <Exp 
+                                type="experience" 
+                                title={item.title} 
+                                subtitle={item.subtitle} 
+                                date={item.date} 
+                                text={item.text} 
+                            />
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 </section>
+
+<script>
+    function setupSelector() {
+        const buttonContainer = document.querySelector(".button-container");
+        const btnEducation = document.getElementById("btn-education");
+        const btnExperience = document.getElementById("btn-experience");
+        const tabEducation = document.getElementById("tab-education");
+        const tabExperience = document.getElementById("tab-experience");
+
+        if (btnEducation && btnExperience && buttonContainer && tabEducation && tabExperience) {
+            btnEducation.addEventListener("click", () => {
+                buttonContainer.setAttribute("data-active", "education");
+                btnEducation.classList.add("active");
+                btnExperience.classList.remove("active");
+                
+                tabEducation.classList.add("active");
+                tabExperience.classList.remove("active");
+            });
+
+            btnExperience.addEventListener("click", () => {
+                buttonContainer.setAttribute("data-active", "experience");
+                btnExperience.classList.add("active");
+                btnEducation.classList.remove("active");
+                
+                tabExperience.classList.add("active");
+                tabEducation.classList.remove("active");
+            });
+        }
+    }
+
+    setupSelector();
+    document.addEventListener("astro:page-load", setupSelector);
+</script>
 
 <style>
     #about {
@@ -80,9 +151,9 @@ import BugIcon from "../assets/BugIcon.svg";
     #about-main-container {
         display: flex;
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
-        gap: 24px;
+        gap: 40px;
         margin: 64px 353px 96px;
     }
 
@@ -116,5 +187,93 @@ import BugIcon from "../assets/BugIcon.svg";
         width: 50%;
         height: fit-content;
         gap: 24px;
+    }
+
+    #about-selector {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .button-container {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        max-width: 320px;
+        background-color: #150A0A;
+        border: 1px solid #DC26261F;
+        border-radius: 14px;
+        padding: 4px;
+        box-sizing: border-box;
+    }
+
+    .selector-line {
+        position: absolute;
+        top: 5px;
+        bottom: 5px;
+        left: 5px;
+        width: calc(50% - 5px);
+        background-color: #DC2626;
+        border-radius: 10px;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 1;
+        box-shadow: 0 2px 10px rgba(220, 38, 38, 0.35);
+    }
+
+    .button-container[data-active="experience"] .selector-line {
+        transform: translateX(100%);
+    }
+
+    .selector-button {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: 50%;
+        padding: 8px 16px;
+        border: none;
+        background: transparent;
+        color: #717171;
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+        transition: color 0.25s ease;
+    }
+
+    .selector-button.active {
+        color: #FFFFFF;
+        font-weight: 600;
+    }
+
+    #exp-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: -10px;
+    }
+
+    .exp-tab-content {
+        display: none;
+        flex-direction: column;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .exp-tab-content.active {
+        display: flex;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(6px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 </style>
